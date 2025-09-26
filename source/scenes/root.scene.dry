@@ -11,7 +11,7 @@ go-to: start_menu_2
 @start_menu_2
 
 - @start_1: Start game
-- @modinfo: Mod Info - Last Updated 2025/07/11
+- @modinfo: Mod Info - Last Updated 2025/09/25
 - @credits: Credits
 - @game_over.achievements
 
@@ -24,7 +24,7 @@ go-to: start if achievement_game_completed; pls_player if not achievement_game_c
 
 Read.
 
-- @modinfo.infotext: Mod Info - Last Updated 2025/07/11
+- @modinfo.infotext: Mod Info - Last Updated 2025/09/25
 
 
 @start
@@ -830,6 +830,7 @@ Q.schleicher_chancellor_timer = 0;
 Q.nazi_decay_timer = 0;
 Q.red_general_timer = 0;
 Q.weimar_rally_timer = 0;
+Q.editorial_line = "Center";
 Q.z_party_name = "Z";
 Q.dnvp_leader = "Westarp";
 Q.dnvp_ideology = "Radical";
@@ -980,6 +981,7 @@ Q.schleicher_papen_r = 5;
 Q.schleicher_spd_r = 2;
 Q.schleicher_spd_support = 0;
 Q.schleicher_spd_influence = 0;
+Q.schleicher_spd_concession = 0;
 Q.schleicher_approval = 2;
 
 Q.schleicher_strength = 5;
@@ -1062,7 +1064,7 @@ if (Q.achievement_schwarz_rot_gold) {
 const achievements = [
   "achievement_eiserne_front",
   "achievement_civil_war",
-  "achievement_einigkeit",
+  "achievement_einigkeit_und_recht_und_freiheit",
   "achievement_victory_for_the_republic",
   "achievement_bollwerk_der_demokratie",
   "achievement_red_tzar_of_prussia",
@@ -1086,6 +1088,7 @@ const achievements = [
   "achievement_equality",
   "achievement_hirschfeld",
   "achievement_women_reichsbanner",
+  "achievement_anders_als_die_andern",
   "achievement_bruder_zur_sonne",
   "achievement_die_rote_fahne",
   "achievement_panik_im_mittelstand",
@@ -1168,7 +1171,15 @@ const achievements = [
   "achievement_neue_geschaftsfuhrung",
   "achievement_rotes_bayern",
   "achievement_1919_geracht",
-  "achievement_nach_der_spd_wir"
+  "achievement_nach_der_spd_wir",
+  "achievement_eurokommunismus",
+  "achievement_kriegswirtschaft",
+  "achievement_sechs_sieben",
+  "achievement_er_ist_wieder_da",
+  "achievement_abgrundlaufer",
+  "achievement_bruning_uber_alles",
+  "achievement_der_aufstieg_skywalkers",
+  "achievement_kulturkampf"
 ];
 
 Q.unlockedCount = achievements.filter(key => Q[key] === 1).length;

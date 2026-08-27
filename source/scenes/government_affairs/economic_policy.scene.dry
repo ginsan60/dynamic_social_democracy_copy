@@ -34,6 +34,8 @@ The economy is finally showing signs of improvement. The bourgeois parties are p
 
 [? if in_popular_front or in_left_front: The <span style="color: #700000;">**KPD**</span> opposes the economic plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
 
+[? if sapd_toleration: The <span style="color: #9B0000;">**SAPD**</span> opposes the economic plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
+
 @lautenbach_wtb
 title: Infuse the WTB Plan with the [+ public_works_name +] plan, with a considerable expansion of public works and wages.
 subtitle: -2 budget.
@@ -48,6 +50,8 @@ We have considerably expanded the public works program, and together with a camp
 Our spending on public works has reduced the need for unemployment insurance and welfare, while also increasing tax receipts through the multiplier effect as the new money circulates in the economy, helping to recover some of our spending. We continue to reinvest most of this new revenue into the program.
 
 [? if in_popular_front or in_left_front: The <span style="color: #700000;">**KPD**</span> opposes the economic plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
+
+[? if sapd_toleration: The <span style="color: #9B0000;">**SAPD**</span> opposes the economic plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
 
 @economic_plan_menu
 
@@ -128,6 +132,8 @@ The economy is doing better, finally. Even the bourgeois parties are beginning t
 
 [? if in_popular_front or in_left_front: The <span style="color: #700000;">**KPD**</span>, however, still opposes our policy of "rescuing" capitalism. ?]
 
+[? if sapd_toleration: The <span style="color: #9B0000;">**SAPD**</span> however, still opposes our policy of "rescuing" capitalism. ?]
+
 @implement_wtb_no_deficit
 title: Implement the WTB plan.
 subtitle: -[+ wtb_budget +] budget. [? if wtb_budget == 3 : Our pro-labor policies have reduced the cost of the plan. ?]
@@ -140,6 +146,8 @@ achievement: wirtschaftspolitik
 We have started to enact the WTB plan. Money is beginning to flow through the economy via investments in large-scale public works. The bourgeois parties express concerns about inflation and spending, preferring tax cuts to address the economic crisis. However, they begrudgingly accept our plan, reassured by the surplus we’ve built up.
 
 [? if in_popular_front or in_left_front: The <span style="color: #700000;">**KPD**</span> opposes the WTB plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
+
+[? if sapd_toleration: The <span style="color: #9B0000;">**SAPD**</span> opposes the WTB plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
 
 @implement_wtb_deficit
 title: Implement the WTB plan.
@@ -154,6 +162,8 @@ We have entered the realm of deficit spending. Our coalition partners are disgus
 
 [? if in_popular_front or in_left_front: The <span style="color: #700000;">**KPD**</span> opposes the WTB plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
 
+[? if sapd_toleration: The <span style="color: #9B0000;">**SAPD**</span> opposes the WTB plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
+
 
 ####################### left economic policies (socializations)
 
@@ -162,7 +172,7 @@ title: Implement the Left plan for the transformation of the economy.
 subtitle: -[+ nationalize_budget +] budget. [? if works_councils >= 3 : Our works councils have reduced the budget necessary for this program. ?] [? if socializations >= 2: Our existing socialization policies have reduced the budget necessary for this program. ?]
 unavailable-subtitle: Our coalition agreement stipulates against socialization.
 choose-if: not cvp_economy_accepted
-view-if: nationalization_adopted == 1 and nationalization_progress == 0 and not schleicher_spd
+view-if: nationalization_adopted == 1 and not schleicher_spd
 go-to: nationalize_deficit if budget < nationalize_budget; nationalize_no_deficit if budget >= nationalize_budget
 
 
@@ -191,7 +201,7 @@ title: Take a budget deficit to fund the nationalization program.
 choose-if: left_strength > reformist_strength + center_strength or woytinsky_advisor == 1
 subtitle: [? if woytinsky_advisor: Woytinsky can bring us around to supporting a budget deficit. ?]
 unavailable-subtitle: [? if left_strength <= reformist_strength + center_strength: The party does not yet support budget deficits for this purpose. ?] [? if not woytinsky_advisor : Perhaps bringing on an advisor might help make this action palatable? ?]
-on-arrival: nationalization_progress += 1; capital_strike_progress += 3; unemployed -= 3 if unemployed >= 6; unemployed -= 1.2 if works_councils >= 3; budget -= nationalize_budget; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 5*(1-dissent); new_middle_spd += 3*(1-dissent) if new_middle_conscious == 1; coalition_dissent += 2; coalition_dissent -= 1 if z_leader == "Kaiser"; dvp_relation -= 6; lvp_relation -= 6; z_relation -= 4; new_middle_spd -= 3 if new_middle_consciouss == 0; old_middle_spd -= 3; economy_goal_completed += 1; economic_plan_goal_spd += 1; inflation += 3; dvp_right += 4; ddp_relation -= 6; ddp_right += 3; ddp_cohesion -= 2; lvp_right += 4; goal_spd_cancel_peoples += 1; economic_growth += 2 if economic_growth < 5;
+on-arrival: nationalization_progress += 1; capital_strike_progress += 3; unemployed -= 3 if unemployed >= 6; unemployed -= 1.2 if works_councils >= 3; budget -= nationalize_budget; works_program += 1; workers_spd += 8*(1-dissent); unemployed_spd += 5*(1-dissent); new_middle_spd += 3*(1-dissent) if new_middle_conscious == 1; coalition_dissent += 2; coalition_dissent -= 1 if z_leader == "Kaiser"; dvp_relation -= 6; lvp_relation -= 6; z_relation -= 4; new_middle_spd -= 3 if new_middle_conscious == 0; old_middle_spd -= 3; economy_goal_completed += 1; economic_plan_goal_spd += 1; inflation += 3; dvp_right += 4; ddp_relation -= 6; ddp_right += 3; ddp_cohesion -= 2; lvp_right += 4; goal_spd_cancel_peoples += 1; economic_growth += 2 if economic_growth < 5;
 achievement: wirtschaftspolitik
 
 [? if woytinsky_advisor: Most of the party, even on the left, are opposed to budget deficits for any purpose, with the exception of Wladimir Woytinsky. While he did not originally support the left's "transformational" plan, he has come around, and has persuaded the party and the Finance Ministry to support budget deficits in limited cases, for the purpose of exiting from the depression. ?]
@@ -259,6 +269,8 @@ achievement: wirtschaftspolitik
 
 [? if in_popular_front or in_left_front: The <span style="color: #700000;">**KPD**</span> opposes the economic plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
 
+[? if sapd_toleration: The <span style="color: #9B0000;">**SAPD**</span> opposes the economic plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
+
 @moderate_plan_limited_budget
 title: Partially implement the Reformists' job-creation plan, with a lower cost.
 subtitle: -1 budget.
@@ -277,3 +289,5 @@ achievement: wirtschaftspolitik
 [? if unemployed < 10 : Unemployment is low enough that the plan does not seem to have the intended effect. ?]
 
 [? if in_popular_front or in_left_front: The <span style="color: #700000;">**KPD**</span> opposes the economic plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]
+
+[? if sapd_toleration: The <span style="color: #9B0000;">**SAPD**</span> opposes the economic plan, seeing it as a rescue of capitalism rather than a step towards real <span style="color: #9b0000;">socialism</span>. ?]

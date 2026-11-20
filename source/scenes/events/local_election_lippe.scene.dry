@@ -31,6 +31,7 @@ on-arrival: {!
 var lippe_adjustment_factors = {
     spd: 1.5,
     sapd: 0.4,
+    srpd: 1.3,
     kpd: 0.65,
     ddp: 1.0,
     lvp: 1.2,
@@ -45,6 +46,7 @@ var lippe_adjustment_factors = {
 
 Q.spd_r_lippe = 0;
 Q.sapd_r_lippe = 0;
+Q.srpd_r_lippe = 0;
 Q.kpd_r_lippe = 0;
 Q.ddp_r_lippe = 0;
 Q.lvp_r_lippe = 0;
@@ -58,6 +60,7 @@ Q.dnf_r_lippe = 0;
 
 Q.spd_lippe_elections_vote = 0;
 Q.sapd_lippe_elections_vote = 0;
+Q.srpd_lippe_elections_vote = 0;
 Q.kpd_lippe_elections_vote = 0;
 Q.ddp_lippe_elections_vote = 0;
 Q.lvp_lippe_elections_vote = 0;
@@ -74,6 +77,7 @@ if (Q.rural_spd_normalized >= 20) lippe_adjustment_factors.spd += 0.15;
 if (Q.spd_lippe) lippe_adjustment_factors.spd *= Q.spd_lippe;
 Q.spd_lippe_elections_vote = Q.spd_votes*lippe_adjustment_factors.spd;
 Q.sapd_lippe_elections_vote = Q.sapd_votes*lippe_adjustment_factors.sapd;
+Q.srpd_lippe_elections_vote = Q.srpd_votes*lippe_adjustment_factors.srpd;
 Q.kpd_lippe_elections_vote = Q.kpd_votes*lippe_adjustment_factors.kpd;
 Q.ddp_lippe_elections_vote = Q.ddp_votes*lippe_adjustment_factors.ddp;
 Q.lvp_lippe_elections_vote = Q.lvp_votes*lippe_adjustment_factors.lvp;
@@ -94,11 +98,12 @@ Q.other_lippe_elections_vote = Q.other_votes*lippe_adjustment_factors.other;
 Q.kvp_lippe_elections_vote = Q.kvp_votes*lippe_adjustment_factors.kvp;
 Q.dnf_lippe_elections_vote = Q.dnf_votes*lippe_adjustment_factors.dnf;
 
-Q.total_votes_lippe = Q.spd_lippe_elections_vote + Q.sapd_lippe_elections_vote + Q.kpd_lippe_elections_vote + Q.ddp_lippe_elections_vote + Q.lvp_lippe_elections_vote + Q.z_lippe_elections_vote + Q.dvp_lippe_elections_vote + Q.dnvp_lippe_elections_vote + Q.nsdap_lippe_elections_vote + Q.other_lippe_elections_vote + Q.kvp_lippe_elections_vote + Q.dnf_lippe_elections_vote;
+Q.total_votes_lippe = Q.spd_lippe_elections_vote + Q.sapd_lippe_elections_vote + Q.srpd_lippe_elections_vote + Q.kpd_lippe_elections_vote + Q.ddp_lippe_elections_vote + Q.lvp_lippe_elections_vote + Q.z_lippe_elections_vote + Q.dvp_lippe_elections_vote + Q.dnvp_lippe_elections_vote + Q.nsdap_lippe_elections_vote + Q.other_lippe_elections_vote + Q.kvp_lippe_elections_vote + Q.dnf_lippe_elections_vote;
 
 if (Q.total_votes_lippe > 0) {
     Q.spd_lippe_elections_vote = (Q.spd_lippe_elections_vote / Q.total_votes_lippe) * 100;
     Q.sapd_lippe_elections_vote = (Q.sapd_lippe_elections_vote / Q.total_votes_lippe) * 100;
+    Q.srpd_lippe_elections_vote = (Q.srpd_lippe_elections_vote / Q.total_votes_lippe) * 100;
     Q.kpd_lippe_elections_vote = (Q.kpd_lippe_elections_vote / Q.total_votes_lippe) * 100;
     Q.ddp_lippe_elections_vote = (Q.ddp_lippe_elections_vote / Q.total_votes_lippe) * 100;
     Q.lvp_lippe_elections_vote = (Q.lvp_lippe_elections_vote / Q.total_votes_lippe) * 100;
@@ -113,9 +118,10 @@ if (Q.total_votes_lippe > 0) {
     Q.spd_lippe_elections_vote = Math.round((Q.spd_lippe_elections_vote + (target - Q.spd_lippe_elections_vote) * 0.2) * 10) / 10;
     let target_2 = 39.5;
     Q.nsdap_lippe_elections_vote = Math.round((Q.nsdap_lippe_elections_vote + (target_2 - Q.nsdap_lippe_elections_vote) * 0.2) * 10) / 10;
-    Q.total_votes_lippe = Q.spd_lippe_elections_vote + Q.sapd_lippe_elections_vote + Q.kpd_lippe_elections_vote + Q.ddp_lippe_elections_vote + Q.lvp_lippe_elections_vote + Q.z_lippe_elections_vote + Q.dvp_lippe_elections_vote + Q.dnvp_lippe_elections_vote + Q.nsdap_lippe_elections_vote + Q.other_lippe_elections_vote + Q.kvp_lippe_elections_vote + Q.dnf_lippe_elections_vote;
+    Q.total_votes_lippe = Q.spd_lippe_elections_vote + Q.sapd_lippe_elections_vote + Q.srpd_lippe_elections_vote + Q.kpd_lippe_elections_vote + Q.ddp_lippe_elections_vote + Q.lvp_lippe_elections_vote + Q.z_lippe_elections_vote + Q.dvp_lippe_elections_vote + Q.dnvp_lippe_elections_vote + Q.nsdap_lippe_elections_vote + Q.other_lippe_elections_vote + Q.kvp_lippe_elections_vote + Q.dnf_lippe_elections_vote;
     Q.spd_lippe_elections_vote = (Q.spd_lippe_elections_vote / Q.total_votes_lippe) * 100;
     Q.sapd_lippe_elections_vote = (Q.sapd_lippe_elections_vote / Q.total_votes_lippe) * 100;
+    Q.sapd_lippe_elections_vote = (Q.srpd_lippe_elections_vote / Q.total_votes_lippe) * 100;
     Q.kpd_lippe_elections_vote = (Q.kpd_lippe_elections_vote / Q.total_votes_lippe) * 100;
     Q.ddp_lippe_elections_vote = (Q.ddp_lippe_elections_vote / Q.total_votes_lippe) * 100;
     Q.lvp_lippe_elections_vote = (Q.lvp_lippe_elections_vote / Q.total_votes_lippe) * 100;
@@ -130,6 +136,7 @@ if (Q.total_votes_lippe > 0) {
 
 Q.spd_lippe_elections_vote = (Q.spd_lippe_elections_vote != undefined ? parseFloat(Q.spd_lippe_elections_vote.toFixed(1)) : 0);
 Q.sapd_lippe_elections_vote = (Q.sapd_lippe_elections_vote != undefined ? parseFloat(Q.sapd_lippe_elections_vote.toFixed(1)) : 0);
+Q.srpd_lippe_elections_vote = (Q.srpd_lippe_elections_vote != undefined ? parseFloat(Q.srpd_lippe_elections_vote.toFixed(1)) : 0);
 Q.kpd_lippe_elections_vote = (Q.kpd_lippe_elections_vote != undefined ? parseFloat(Q.kpd_lippe_elections_vote.toFixed(1)) : 0);
 Q.ddp_lippe_elections_vote = (Q.ddp_lippe_elections_vote != undefined ? parseFloat(Q.ddp_lippe_elections_vote.toFixed(1)) : 0);
 Q.lvp_lippe_elections_vote = (Q.lvp_lippe_elections_vote != undefined ? parseFloat(Q.lvp_lippe_elections_vote.toFixed(1)) : 0);
@@ -143,6 +150,7 @@ Q.dnf_lippe_elections_vote = (Q.dnf_lippe_elections_vote != undefined ? parseFlo
 
 if (Q.spd_lippe_elections_vote >= 3.2) Q.spd_r_lippe = Q.spd_lippe_elections_vote;
 if (Q.sapd_lippe_elections_vote >= 3.2) Q.sapd_r_lippe = Q.sapd_lippe_elections_vote;
+if (Q.srpd_lippe_elections_vote >= 3.2) Q.srpd_r_lippe = Q.srpd_lippe_elections_vote;
 if (Q.kpd_lippe_elections_vote >= 3.2) Q.kpd_r_lippe = Q.kpd_lippe_elections_vote;
 if (Q.ddp_lippe_elections_vote >= 3.2) Q.ddp_r_lippe = Q.ddp_lippe_elections_vote;
 if (Q.lvp_lippe_elections_vote >= 3.2) Q.lvp_r_lippe = Q.lvp_lippe_elections_vote;
@@ -157,6 +165,7 @@ if (Q.dnf_lippe_elections_vote >= 3.2) Q.dnf_r_lippe = Q.dnf_lippe_elections_vot
 var lippe_adjustment_r_factors = {
     spd: 1.05,
     sapd: 1.0,
+    srpd: 1.0,
     kpd: 0.85,
     ddp: 1.0,
     lvp: 1.0,
@@ -171,6 +180,7 @@ var lippe_adjustment_r_factors = {
 
 Q.spd_r_lippe = Q.spd_r_lippe*lippe_adjustment_r_factors.spd;
 Q.sapd_r_lippe = Q.sapd_r_lippe*lippe_adjustment_r_factors.sapd;
+Q.srpd_r_lippe = Q.srpd_r_lippe*lippe_adjustment_r_factors.srpd;
 Q.kpd_r_lippe = Q.kpd_r_lippe*lippe_adjustment_r_factors.kpd;
 Q.ddp_r_lippe = Q.ddp_r_lippe*lippe_adjustment_r_factors.ddp;
 Q.lvp_r_lippe = Q.lvp_r_lippe*lippe_adjustment_r_factors.lvp;
@@ -188,6 +198,7 @@ Q.total_r_lippe = 0;
 
 if (Q.spd_r_lippe) Q.total_r_lippe += Q.spd_r_lippe;
 if (Q.sapd_r_lippe) Q.total_r_lippe += Q.sapd_r_lippe;
+if (Q.srpd_r_lippe) Q.total_r_lippe += Q.srpd_r_lippe;
 if (Q.kpd_r_lippe) Q.total_r_lippe += Q.kpd_r_lippe;
 if (Q.ddp_r_lippe) Q.total_r_lippe += Q.ddp_r_lippe;
 if (Q.lvp_r_lippe) Q.total_r_lippe += Q.lvp_r_lippe;
@@ -202,6 +213,7 @@ if (Q.dnf_r_lippe) Q.total_r_lippe += Q.dnf_r_lippe;
 if (Q.total_r_lippe > 0) {
     Q.spd_r_lippe = (Q.spd_r_lippe / Q.total_r_lippe) * 100;
     Q.sapd_r_lippe = (Q.sapd_r_lippe / Q.total_r_lippe) * 100;
+    Q.srpd_r_lippe = (Q.srpd_r_lippe / Q.total_r_lippe) * 100;
     Q.kpd_r_lippe = (Q.kpd_r_lippe / Q.total_r_lippe) * 100;
     Q.ddp_r_lippe = (Q.ddp_r_lippe / Q.total_r_lippe) * 100;
     Q.lvp_r_lippe = (Q.lvp_r_lippe / Q.total_r_lippe) * 100;
@@ -280,6 +292,7 @@ function allocateSeats(percentages, totalSeats = 21) {
 const inputPercentages = {
     spd_r_lippe: Q.spd_r_lippe,
     sapd_r_lippe: Q.sapd_r_lippe,
+    srpd_r_lippe: Q.srpd_r_lippe,
     kpd_r_lippe: Q.kpd_r_lippe,
     ddp_r_lippe: Q.ddp_r_lippe,
     lvp_r_lippe: Q.lvp_r_lippe,
@@ -317,6 +330,7 @@ Q.old_lvp_r_lippe = 0.0;
 Q.old_kvp_r_lippe = 0.0;
 Q.old_dnf_r_lippe = 0.0;
 Q.old_sapd_r_lippe = 0.0;
+Q.old_srpd_r_lippe = 0.0;
 
 if (Q.lvp_formed) Q.old_lvp_r_lippe = Q.old_dvp_r_lippe + Q.old_ddp_r_lippe;
 if (Q.kvp_formed) {
@@ -378,6 +392,15 @@ data = data.concat([{
     "name": "SPD",
     "seats": Math.round(Q.spd_r_lippe * 0.21),
 }]);
+
+if (Q.srpd_formed && Q.srpd_r_lippe) {
+    data.push({
+        "id": "srpd",
+        "legend": "SRPD",
+        "name": "SRPD",
+        "seats": Math.round(Q.srpd_r_lippe * 0.21),
+    });
+}
 
 if (Q.ddp_r_lippe && !Q.lvp_formed) {
     data.push({
@@ -500,6 +523,8 @@ Vote % changes are compared to the last *Reichstag* election. <br> Seat % change
 
 [? if sapd_formed : {!<tr><td><div class="box" style='background-color:#9B0000'> </div> !}SAPD: {!</td><td>!} [+ sapd_lippe_elections_vote +]% {!</td><td>!} [+ str_votes_change_sapd_lippe +] {!</td><td>!} [+ sapd_r_lippe +]% {!</td><td>!} [+ str_change_sapd_lippe +] ?]
 
+[? if srpd_formed : {!<tr><td><div class="box" style='background-color:#F4A460'> </div> !}SRPD: {!</td><td>!} [+ srpd_lippe_elections_vote +]% {!</td><td>!} [+ str_votes_change_srpd_lippe +] {!</td><td>!} [+ srpd_r_lippe +]% {!</td><td>!} [+ str_change_srpd_lippe +] ?]
+
 {!<tr><td><div class="box" style='background-color:#700000'> </div> !}KPD: {!</td><td>!} [+ kpd_lippe_elections_vote +]% {!</td><td>!} [+ str_votes_change_kpd_lippe +] {!</td><td>!} [+ kpd_r_lippe +]% {!</td><td>!} [+ str_change_kpd_lippe +] {! </td></tr>!}
 
 [? if not lvp_formed: {!<tr><td><div class="box" style='background-color:#D3C24D'> </div> !} [+ ddp_name +]: {!</td><td>!} [+ ddp_lippe_elections_vote +]% {!</td><td>!} [+ str_votes_change_ddp_lippe +] {!</td><td>!} [+ ddp_r_lippe +]% {!</td><td>!} [+ str_change_ddp_lippe +] {! </td></tr>!} ?]
@@ -542,7 +567,7 @@ Who cares what coalition forms here?
 @nsdap_big_win
 title: The <span style="color: #7A3C00;">**NSDAP**</span> score a crushing victory.
 view-if: change_nsdap_votes_lippe >= 6
-on-arrival: lippe_big_win = 1; hindenburg_hitler_r += 2; hindenburg_schleicher_r -= 2; workers_nsdap += 2; unemployed_nsdap += 2; new_middle_nsdap += 4; old_middle_nsdap += 4; rural_nsdap += 4; nazi_funds += 1; lippe_good = 1
+on-arrival: lippe_big_win = 1; hindenburg_hitler_r += 2; hindenburg_schleicher_r -= 2; workers_nsdap += 2; unemployed_nsdap += 2; new_middle_nsdap += 4; old_middle_nsdap += 4; rural_nsdap += 4; nazi_funds += 1; lippe_good = 1; kpd_nazi_urgency += 2;
 
 Unexpectedly, the <span style="color: #7A3C00;">**NSDAP**</span> matched their peak electoral performance—proof that the movement isn’t dying, but growing.
 
@@ -551,7 +576,7 @@ This is a major propaganda win for the <span style="color: #7A3C00;">**NSDAP**</
 @nsdap_moderate_win
 title: The <span style="color: #7A3C00;">**NSDAP**</span> score a dubious triumph.
 view-if: change_nsdap_votes_lippe >= 3 and change_nsdap_votes_lippe < 6
-on-arrival: hindenburg_hitler_r += 1; hindenburg_schleicher_r -= 1; new_middle_nsdap += 2; old_middle_nsdap += 2; rural_nsdap += 2; lippe_good = 1
+on-arrival: hindenburg_hitler_r += 1; hindenburg_schleicher_r -= 1; new_middle_nsdap += 2; old_middle_nsdap += 2; rural_nsdap += 2; lippe_good = 1; kpd_nazi_urgency += 1;
 
 The <span style="color: #7A3C00;">Nazis</span> fell short of their peak results—but still gained votes compared to the last election. To the casual observer, the <span style="color: #7A3C00;">**NSDAP**</span> looks like it’s back on the rise, and they’ve seized on the outcome as a cheap propaganda boost to reenergize their disillusioned base.
 
@@ -575,7 +600,7 @@ Nevertheless, the <span style="color: #7A3C00;">**NSDAP**</span> continues to us
 @nsdap_joever
 title: The <span style="color: #7A3C00;">**NSDAP**</span>'s suffers a crushing defeat!
 view-if: change_nsdap_votes_lippe < 0 and change_nsdap_votes_lippe > -4
-on-arrival: hindenburg_hitler_r -= 1; workers_nsdap -= 2; unemployed_nsdap -= 2; new_middle_nsdap -= 4; old_middle_nsdap -= 4; rural_nsdap -= 4; catholics_nsdap -= 2; nazi_funds -= 1
+on-arrival: hindenburg_hitler_r -= 1; workers_nsdap -= 2; unemployed_nsdap -= 2; new_middle_nsdap -= 4; old_middle_nsdap -= 4; rural_nsdap -= 4; catholics_nsdap -= 2; nazi_funds -= 1; kpd_nazi_urgency -= 1;
 
 The <span style="color: #7A3C00;">**NSDAP**</span> has suffered a crushing defeat! Despite throwing everything into this campaign, their vote share has actually declined. This is clear evidence that the movement is collapsing rapidly—and that new elections would be disastrous for the <span style="color: #7A3C00;">Nazi</span> cause.
 
@@ -586,7 +611,7 @@ Donations are drying up, party membership is plummeting, defections are soaring,
 @nsdap_explode
 title: The <span style="color: #7A3C00;">**NSDAP**</span> is rapidly imploding!
 view-if: change_nsdap_votes_lippe <= -4
-on-arrival: hindenburg_hitler_r -= 2; workers_nsdap -= 4; unemployed_nsdap -= 4; new_middle_nsdap -= 8; old_middle_nsdap -= 8; rural_nsdap -= 6; catholics_nsdap -= 4; nazi_funds -= 2
+on-arrival: hindenburg_hitler_r -= 2; workers_nsdap -= 4; unemployed_nsdap -= 4; new_middle_nsdap -= 8; old_middle_nsdap -= 8; rural_nsdap -= 6; catholics_nsdap -= 4; nazi_funds -= 2; kpd_nazi_urgency -= 2;
 
 The <span style="color: #7A3C00;">**NSDAP**</span> is in free fall! Despite throwing everything they had into this campaign, their vote share has actually declined—a humiliating blow that confirms the movement’s rapid implosion.
 
